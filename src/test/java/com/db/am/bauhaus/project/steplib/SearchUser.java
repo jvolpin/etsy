@@ -1,6 +1,7 @@
 package com.db.am.bauhaus.project.steplib;
 
 import com.db.am.bauhaus.project.pages.MainSearchPage;
+import com.db.am.bauhaus.project.pages.ResultsPage;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.steps.ScenarioSteps;
 
@@ -13,12 +14,13 @@ import static org.hamcrest.Matchers.containsString;
 public class SearchUser extends ScenarioSteps {
 
     MainSearchPage mainSearchPage;
+    ResultsPage resultsPage;
 
     String searchText = "craft";
 
-    String searchOption = "Accessories";
+    private String dropDownOption = null;
 
-    String searchElement = null;
+    private String selectedIcon = null;
 
     @Step
     public void search_from_input_box() {
@@ -26,34 +28,35 @@ public class SearchUser extends ScenarioSteps {
     }
 
     @Step
-    public void search_from_drop_down() {
-        mainSearchPage.searchFromDropDown(searchOption);
+    public String search_from_drop_down() {
+        dropDownOption = mainSearchPage.searchFromDropDown();
+        return dropDownOption;
     }
 
     @Step
     public String search_from_icons() {
-        searchElement = mainSearchPage.searchFromIcons();
-        return searchElement;
+        selectedIcon = mainSearchPage.searchFromIcons();
+        return selectedIcon;
     }
 
     @Step
     public void verify_result_for_top_categories() {
-        assertThat(mainSearchPage.getTopCategoriesHeader(), containsString(searchText));
+        assertThat(resultsPage.getTopCategoriesHeader(), containsString(searchText));
     }
 
     @Step
     public void verify_result_for_all_categories() {
-        assertThat(mainSearchPage.getAllCategoriesHeader(), containsString(searchText));
+        assertThat(resultsPage.getAllCategoriesHeader(), containsString(searchText));
     }
 
     @Step
     public void verify_result_as_category() {
-        assertThat(mainSearchPage.getCategory(), containsString(searchOption));
+        assertThat(resultsPage.getCategory(), containsString(dropDownOption));
     }
 
     @Step
     public void verify_result_as_description() {
-        assertThat(mainSearchPage.getCategory(), containsString(searchElement));
+        assertThat(resultsPage.getCategory(), containsString(selectedIcon));
     }
 
 

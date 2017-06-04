@@ -26,11 +26,8 @@ public class MainSearchPage extends PageObject {
     @FindBy(id = "category-nav-side-nav-3090-link")
     WebElementFacade accesories;
 
-    @FindBy(xpath = "//*[@id=\"content\"]/div/div/span[2]/div/div/div[1]/a")
-    WebElementFacade icon;
-
     @FindBy(xpath = "//*[@id=\"content\"]/div/div/span[2]/div/div/div[1]/a/div[2]/div/span[2]")
-    WebElementFacade iconTitle;
+    WebElementFacade icon;
 
 
     public MainSearchPage(WebDriver driver) {
@@ -42,27 +39,18 @@ public class MainSearchPage extends PageObject {
         searchButton.click();
     }
 
-    public void searchFromDropDown(String searchOption) {
+    public String searchFromDropDown() {
         Actions action = new Actions(getDriver());
         action.moveToElement(category.waitUntilPresent()).build().perform();
+        String target = accesories.getText();
         accesories.click();
+        return target;
     }
 
     public String searchFromIcons() {
-        String target = iconTitle.getText();
+        String target = icon.waitUntilPresent().getText();
         icon.waitUntilPresent().click();
         return target;
     }
 
-    public String getTopCategoriesHeader() {
-        return find(By.cssSelector("h4.pb-xs-1-5")).getText();
-    }
-
-    public String getAllCategoriesHeader() {
-        return find(By.cssSelector("h1.conform-heading.display-inline")).getText();
-    }
-
-    public String getCategory() {
-        return find(By.cssSelector("div.float-left > h1")).getText();
-    }
 }
