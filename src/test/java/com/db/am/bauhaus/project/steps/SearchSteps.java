@@ -5,6 +5,7 @@ import com.db.am.bauhaus.project.SearchTarget;
 import com.db.am.bauhaus.project.SessionVar;
 import com.db.am.bauhaus.project.pages.MainSearchPage;
 import com.db.am.bauhaus.project.steplib.SearchUser;
+import cucumber.api.PendingException;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -69,5 +70,25 @@ public class SearchSteps {
                 seeThat("the top categories header ", the(SearchTarget.TOP_CATEGORIES_HEADER), containsText(searchText)),
                 seeThat("the all categories header ", the(SearchTarget.ALL_CATEGORIES_HEADER), containsText(searchText))
         );
+    }
+
+    @When("^he searches for a category from the drop-down menu$")
+    public void heSearchesForAProductFromTheDropDownMenu() throws Throwable {
+        user.search_from_drop_down();
+    }
+
+    @Then("^the result should be displayed as the category$")
+    public void theResultShouldBeDisplayedAsTheCategory() throws Throwable {
+        user.verify_result_as_category();
+    }
+
+    @When("^he searches for a category from the icons$")
+    public void heSearchesForACategoryFromTheIcons() throws Throwable {
+        user.search_from_icons();
+    }
+
+    @Then("^the category should be the same as the icon clicked$")
+    public void theCategoryShouldBeTheSameAsTheIconClicked() throws Throwable {
+        user.verify_result_as_description();
     }
 }

@@ -16,9 +16,24 @@ public class SearchUser extends ScenarioSteps {
 
     String searchText = "craft";
 
+    String searchOption = "Accessories";
+
+    String searchElement = null;
+
     @Step
     public void search_from_input_box() {
         mainSearchPage.searchFromInputBox(searchText);
+    }
+
+    @Step
+    public void search_from_drop_down() {
+        mainSearchPage.searchFromDropDown(searchOption);
+    }
+
+    @Step
+    public String search_from_icons() {
+        searchElement = mainSearchPage.searchFromIcons();
+        return searchElement;
     }
 
     @Step
@@ -30,4 +45,16 @@ public class SearchUser extends ScenarioSteps {
     public void verify_result_for_all_categories() {
         assertThat(mainSearchPage.getAllCategoriesHeader(), containsString(searchText));
     }
+
+    @Step
+    public void verify_result_as_category() {
+        assertThat(mainSearchPage.getCategory(), containsString(searchOption));
+    }
+
+    @Step
+    public void verify_result_as_description() {
+        assertThat(mainSearchPage.getCategory(), containsString(searchElement));
+    }
+
+
 }
