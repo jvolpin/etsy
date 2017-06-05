@@ -25,4 +25,17 @@ Feature: Sample
     When he searches for a category from the icons
     Then the category should be the same as the icon clicked
 
+  @api
+  Scenario: Basic api-key validation
+    Given John is not a developer with a valid api-key
+    When he requests a list of shops
+    Then the status code should be 403
 
+  @api
+  Scenario: Should be able to list shops
+    Given John is a developer with a valid api-key
+    When he requests a list of shops
+    Then the status code should be 200
+    And content type should be "application/json"
+    And response should include 25 of "shop_id"
+#    as per API documentation, the number of shops displayed in a single request is 25, hence the last test
