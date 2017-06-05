@@ -38,4 +38,4 @@ Feature: Sample
     Then the status code should be 200
     And content type should be "application/json"
     And response should include 25 of "shop_id"
-#    as per API documentation, the number of shops displayed in a single request is 25, hence the last test
+#    as per API documentation, the default number of shops displayed in a single request is 25

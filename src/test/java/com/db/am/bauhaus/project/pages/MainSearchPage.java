@@ -25,7 +25,7 @@ public class MainSearchPage extends PageObject {
     @FindBy(id = "category-nav-side-nav-3090-link")
     WebElementFacade accesories;
 
-    @FindBy(xpath = "//*[@id=\"content\"]/div/div/span[2]/div/div/div[1]/a/div[2]/div/span[2]")
+    @FindBy(xpath = "//*[@id=\"content\"]//span[2]/div//div[1]/a//span[2]")
     WebElementFacade icon;
 
 

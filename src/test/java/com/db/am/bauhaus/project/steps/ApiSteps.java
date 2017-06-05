@@ -6,12 +6,14 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import org.junit.Assert;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static io.restassured.RestAssured.*;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 
 
 /**
@@ -27,7 +29,7 @@ public class ApiSteps {
 
 //  In order for these tests to work, a valid api key must be inserted in the next line, else all requests will
 //  end up in status code 403 errors
-    private String API_KEY = "<INSERT A VALID API KEY HERE>";
+    private String API_KEY = "Replace this for a real dev api key";
     private String ResponseAsString = null;
 
     @Given("^John is a developer with a valid api-key$")
@@ -64,7 +66,7 @@ public class ApiSteps {
             i++;
         }
 
-        Assert.assertTrue("Not as many shops as expected", i == times);
+        assertThat(i, is(equalTo(times)));
 
     }
 

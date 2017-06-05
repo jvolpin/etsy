@@ -16,7 +16,8 @@ public class ResultsPage extends PageObject {
     @FindBy(css = "h1.conform-heading.display-inline")
     WebElementFacade allCategoriesHeader;
 
-    @FindBy(css = "div.mt-xs-2.mb-xs-3.mt-md-4 > h1")
+//    there seems to be some ab testing going on, so this xpath doesn't look pretty
+    @FindBy(xpath = "//*[@id=\"content\"]/div/div[3]/div[1]/h1 | //*[@id=\"content\"]/div/div/div[2]/h1 | //*[@id=\"content\"]/div/div[2]/div[1]/h1")
     WebElementFacade categoryTitle;
 
     public ResultsPage(WebDriver driver) {
